@@ -51,7 +51,7 @@ const deleteUser= async (req,res) =>{
 
 // Address routes
 // CREATE
-const createAddress= async (req,res) =>{
+const addAddress= async (req,res) =>{
   try {
     
   } catch (error) {
@@ -60,7 +60,7 @@ const createAddress= async (req,res) =>{
   }
 }
 // DELETE
-const deleteAddress= async (req,res) =>{
+const removeAddress= async (req,res) =>{
   try {
     
   } catch (error) {
@@ -71,7 +71,7 @@ const deleteAddress= async (req,res) =>{
 
 // Favorite_Products routes
 // CREATE
-const createFavProduct= async (req,res) =>{
+const addFavProduct= async (req,res) =>{
   try {
     
   } catch (error) {
@@ -80,7 +80,7 @@ const createFavProduct= async (req,res) =>{
   }
 }
 // DELETE
-const deleteFavProduct = async (req,res) =>{
+const removeFavProduct = async (req,res) =>{
   try {
     
   } catch (error) {
@@ -96,8 +96,8 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  createAddress,
-  deleteAddress,
-  createFavProduct,
-  deleteFavProduct
+  addAddress,
+  removeAddress,
+  addFavProduct,
+  removeFavProduct
 }
