@@ -6,17 +6,21 @@ const userController = require('../controller/user.controller');
 
 // Create routes
 // GET
-router.get('/findById/:id');
+router.get('/findById/:id', userController.findUserById);
+router.get('/findAll', userController.findAllUsers);
 
 // POST
-router.post('/create');
-router.post('/createAddress');
-router.post('/createFavProd');
+router.post('/create', userController.createUser);
+router.post('/createAddress', userController.createAddress);
+router.post('/createFavProduct', userController.createFavProduct);
 
 // PUT
-router.put('/update/:id');
+router.put('/update/:id', userController.updateUser);
 
 // DELETE
-router.delete('/delete/:id');
+router.delete('/delete/:id', userController.deleteUser);
+router.post('/deleteAddress/:id', userController.deleteAddress);
+router.post('/deleteFavProduct/:id', userController.deleteFavProduct);
+
 
 module.exports = router;
