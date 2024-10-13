@@ -1,4 +1,3 @@
-const { createUser } = require('../controller/user.controller');
 const User = require('../model/user.model');
 
 // User consult DB
