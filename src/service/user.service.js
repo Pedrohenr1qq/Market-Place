@@ -17,12 +17,35 @@ const deleteUser = (id) => User.findByIdAndDelete(id);
 
 // CREATE address
 const addAddress = (id, address) => {
-
+  return User.findOneAndUpdate(
+    {
+      _id: id
+    }, {
+      $push: {
+        addresses: address
+      }
+    }, {
+      rawResults: true
+    });
 }
 
 // DELETE adress
-const removeAddress = (id, address) => {
-
+const removeAddress = (id, addressId) => {
+  return User.findOneAndUpdate(
+    {
+      _id: id
+    },
+    {
+      $pull:{
+        addresses: {
+          _id: addressId
+        }
+      }
+    },
+    {
+      rawResults: true
+    }
+  );
 }
 
 // CREATE favorite_product

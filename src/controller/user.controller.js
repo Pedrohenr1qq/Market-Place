@@ -76,7 +76,18 @@ const deleteUser= async (req,res) =>{
 // CREATE
 const addAddress= async (req,res) =>{
   try {
-    
+    const newAddress = req.body;
+    newAddress.createdAt = new Date();
+
+    if(!newAddress.street) return res.status(400).send({message: "street field is empty"});
+    if(!newAddress.number) return res.status(400).send({message: "number field is empty"});
+    if(!newAddress.CEP) return res.status(400).send({message: "CEP field is empty"});
+
+    const addressAdded = await userService.addAddress(req.params.id, newAddress);
+
+    if(addressAdded != null) return res.send({message: "User address added"});
+    else return res.status(400).send({message: "Something is wrong. Try again"});
+
   } catch (error) {
     console.log(`Error in create address: ${error.message}`);
     return res.status(500).send({message: 'Internal error. Try again later.'});
@@ -85,7 +96,15 @@ const addAddress= async (req,res) =>{
 // DELETE
 const removeAddress= async (req,res) =>{
   try {
-    
+    const address = req.body;
+
+    if (!address.addressId) return res.status(400).send({message: "addressId field is empty"});
+
+    const removedAddress = await userService.removeAddress(req.params.id, address.addressId);
+
+    if(removedAddress != null) return res.send({message: "User address removed"});
+    else return res.status(400).send({message: "Something is wrong. Try again"});
+
   } catch (error) {
     console.log(`Error in delete address: ${error.message}`);
     return res.status(500).send({message: 'Internal error. Try again later.'});
