@@ -11,7 +11,7 @@ router.get('/findAll', userController.findAllUsers);
 
 // POST
 router.post('/create', userController.createUser);
-router.post('/createAddress', userController.addAddress);
+router.post('/createAddress/:id', userController.addAddress);
 router.post('/createFavProduct', userController.addFavProduct);
 
 // PUT
@@ -19,8 +19,8 @@ router.put('/update/:id', userController.updateUser);
 
 // DELETE
 router.delete('/delete/:id', userController.deleteUser);
-router.post('/deleteAddress/:id', userController.removeAddress);
-router.post('/deleteFavProduct/:id', userController.removeFavProduct);
+router.delete('/deleteAddress/:id', userController.removeAddress);
+router.delete('/deleteFavProduct/:id', userController.removeFavProduct);
 
 
 module.exports = router;
