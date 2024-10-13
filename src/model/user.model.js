@@ -11,14 +11,14 @@ const userSchema = new mongoose.Schema({
       number: {type: Number, required: true},
       complement: {type: String, required: false},
       CEP: {type: String, required: true},
-      createdAt: {type: Date, required: true}
+      createdAt: {type: Date, required: true, default: Date.now()}
     }
   ],
-  createdAt: {type: Date, required: true},
+  createdAt: {type: Date, required: true, default: Date.now()},
   fav_products: [
     {
       _id: {type: mongoose.Schema.Types.ObjectId, required:true, unique:true, ref: 'products'},
-      createdAt: {type: Date, required: true}
+      createdAt: {type: Date, required: true, default: Date.now()}
     }
   ],
   admin: {type: Boolean, required: true, default: false}
