@@ -1,5 +1,7 @@
 // Dependencies
 const express = require('express');
+require('dotenv').config();
+
 
 // Internal Requires
 const connectToDatabase = require('./src/database/database');

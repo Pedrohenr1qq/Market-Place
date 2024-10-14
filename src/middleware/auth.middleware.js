@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
     return res.status(401).send({message: "Login invalid"});
   }
 
-  jwt.verify(token, "670c70db4dd1b9e788d04945", async(err, decoded) => {
+  jwt.verify(token, process.env.SECRET_KEY, async(err, decoded) => {
       if(err) {
         console.log(`Error in validate token: ${err}`);
         return res.status(500).send({message: "Internal Error. Trye again later."});
