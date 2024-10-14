@@ -96,15 +96,18 @@ const addAddress= async (req,res) =>{
 // DELETE
 const removeAddress= async (req,res) =>{
   try {
-    const address = req.body;
+    const addressId = req.body.addressId;
+    let found = false;
 
-    if (!address.addressId) return res.status(400).send({message: "addressId field is empty"});
+    if (!addressId) return res.status(400).send({message: "addressId field is empty"});
 
-    const removedAddress = await userService.removeAddress(req.params.id, address.addressId);
+    const userRemovedAddress = await userService.removeAddress(req.params.id, addressId);
+    if(userRemovedAddress == null) return res.status(404).send({message: "User not found"});
+      
+    userRemovedAddress.addresses.map((address) => found = (address._id == addressId));
 
-    if(removedAddress != null) return res.send({message: "User address removed"});
-    else return res.status(400).send({message: "Something is wrong. Try again"});
-
+    if(found) return res.send({message: "User address removed"});
+    else return res.status(400).send({message: "Address not found."});
   } catch (error) {
     console.log(`Error in delete address: ${error.message}`);
     return res.status(500).send({message: 'Internal error. Try again later.'});
