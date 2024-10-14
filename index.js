@@ -9,6 +9,7 @@ const userRouter = require('./src/router/user.router');
 const authRouter = require('./src/router/auth.router');
 const productRouter = require('./src/router/product.router');
 const categoryRouter = require('./src/router/category.router');
+const shoppCartRouter = require('./src/router/shoppCart.router');
 
 // Starting database connection
 connectToDatabase();
@@ -22,6 +23,7 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/product', productRouter);
 app.use('/category', categoryRouter);
+app.use('/shoppCart', shoppCartRouter);
 
 // Main route
 app.get('/', (req,res) => {
