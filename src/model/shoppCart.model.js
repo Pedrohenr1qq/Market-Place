@@ -9,7 +9,7 @@ const shoppCartSchema = new mongoose.Schema({
   ],
   createdAt: {type: Date, required: true, default: Date.now()},
   totalPrice: {type: Number, required: true},
-  freigth: {type: Number, required: true},
+  freight: {type: Number, required: true},
   userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "users"}
 });
 

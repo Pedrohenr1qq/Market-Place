@@ -25,7 +25,6 @@ const createProduct = async (req, res) => {
   try {
     const newProduct = {
       ... req.body,
-      userId: req.userId,
     }
 
     return res.status(201).send(await productService.createProduct(newProduct));

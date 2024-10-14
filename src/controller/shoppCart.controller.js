@@ -23,7 +23,6 @@ const findAllShoppCarts = async (req, res) => {
 
 const createShoppCart = async (req, res) => {
   try {
-    console.log(req.userId);
 
     const newShoppCart = {
       ...req.body,
