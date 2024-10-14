@@ -50,12 +50,40 @@ const removeAddress = (id, addressId) => {
 
 // CREATE favorite_product
 const addFavProduct = (id, favProduct) =>{
-
+  return User.findOneAndUpdate(
+    {
+      _id: id
+    },
+    {
+      $push:{
+        favProducts: {
+          _id: favProduct._id
+        }
+      }
+    },
+    {
+      rawResults: true
+    }
+  );
 }
 
 // DELETE favorite_product
 const removeFavProduct = (id, favProduct) =>{
-  
+  return User.findOneAndUpdate(
+    {
+      _id: id
+    },
+    {
+      $pull:{
+        favProducts: {
+          _id: favProduct._id
+        }
+      }
+    },
+    {
+      rawResults: true
+    }
+  );
 }
 
 module.exports = {

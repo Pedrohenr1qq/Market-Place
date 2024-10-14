@@ -118,7 +118,8 @@ const removeAddress= async (req,res) =>{
 // CREATE
 const addFavProduct= async (req,res) =>{
   try {
-    
+    res.status(201).send(await userService.addFavProduct(req.params.id, req.body));
+
   } catch (error) {
     console.log(`Error in create favorite product: ${error.message}`);
     return res.status(500).send({message: 'Internal error. Try again later.'});
@@ -127,7 +128,8 @@ const addFavProduct= async (req,res) =>{
 // DELETE
 const removeFavProduct = async (req,res) =>{
   try {
-    
+    res.send(await userService.removeFavProduct(req.params.id, req.body));
+
   } catch (error) {
     console.log(`Error in delete favorite product: ${error.message}`);
     return res.status(500).send({message: 'Internal error. Try again later.'});
