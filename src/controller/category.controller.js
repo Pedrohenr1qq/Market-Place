@@ -22,12 +22,8 @@ const findAllCategories = async (req,res) => {
 
 const createCategory = async (req,res) => {
   try {
-    const newCategory = {
-      ...req.body,
-      createdAt: new Date(),
-    };
     
-    res.status(201).send(await categoryService.createCategory(newCategory));
+    res.status(201).send(await categoryService.createCategory(req.body));
 
   } catch (err) {
     console.log(`Error in create CATEGORY: ${err.message}`);

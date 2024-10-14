@@ -26,7 +26,6 @@ const createProduct = async (req, res) => {
     const newProduct = {
       ... req.body,
       userId: req.userId,
-      createdAt: new Date
     }
 
     return res.status(201).send(await productService.createProduct(newProduct));
@@ -57,7 +56,6 @@ const deleteProduct = async (req, res) => {
 
 const addCategoryToProduct = async (req, res) => {
   try {
-    req.body.createdAt = new Date();
     const category = await productService.addCategoryToProduct(req.params.id, req.body);
 
     console.log("Category added");
