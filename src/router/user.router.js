@@ -3,11 +3,12 @@ const router = require('express').Router();
 
 // Internal Requires
 const userController = require('../controller/user.controller');
+const authMiddleware = require('../middleware/auth.middleware');
 
 // Create routes
 // GET
-router.get('/findById/:id', userController.findUserById);
-router.get('/findAll', userController.findAllUsers);
+router.get('/findById/:id', authMiddleware, userController.findUserById);
+router.get('/findAll' ,userController.findAllUsers);
 
 // POST
 router.post('/create', userController.createUser);
