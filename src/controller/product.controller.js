@@ -55,10 +55,38 @@ const deleteProduct = async (req, res) => {
   }
 }
 
+const addCategoryToProduct = async (req, res) => {
+  try {
+    req.body.createdAt = new Date();
+    const category = await productService.addCategoryToProduct(req.params.id, req.body);
+
+    console.log(category);
+    res.send({message: "Categoria adicionada"});
+
+  } catch (err) {
+    console.log(`Error in delete a PRODUCT: ${err.message}`);
+    return res.status(500).send({message: "Internal Error. Trye again later."});
+  }
+}
+
+const removeCategoryFromProduct = async (req, res) => {
+  try {
+    const category = await productService.addCategoryToProduct(req.body);
+    console.log(category);
+    res.send({message: "Categoria removida"});
+
+  } catch (err) {
+    console.log(`Error in delete a PRODUCT: ${err.message}`);
+    return res.status(500).send({message: "Internal Error. Trye again later."});
+  }
+}
+
 module.exports = {
   findProductById,
   findAllProducts,
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  addCategoryToProduct,
+  removeCategoryFromProduct
 }

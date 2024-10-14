@@ -6,12 +6,12 @@ const productSchema = new mongoose.Schema({
   unitPrice: {type: Number, required: true},
   image: {type: String, required: true},
   barCode: {type: Number, required: true, unique:true},
-  // category: [
-  //   {
-  //     _id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, ref: "categories"},
-  //     createdAt: {type: Date, required: true}
-  //   }
-  // ]
+  categories: [
+    {
+      _id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, ref: "categories"},
+      createdAt: {type: Date, required: true}
+    }
+  ]
 })
 
 const Product = mongoose.model("products", productSchema);
