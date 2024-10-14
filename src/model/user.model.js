@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   name:{ type: String, required: true},
@@ -15,13 +16,14 @@ const userSchema = new mongoose.Schema({
     }
   ],
   createdAt: {type: Date, required: true, default: Date.now()},
-  // fav_products: [
-  //   {
-  //     _id: {type: mongoose.Schema.Types.ObjectId, required:true, unique:true, ref: 'products'},
-  //     createdAt: {type: Date, required: true, default: Date.now()}
-  //   }
-  // ],
   admin: {type: Boolean, required: true, default: false}
+});
+
+userSchema.pre("save", async function (next) {
+  if(this.password){
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
 });
 
 const User = mongoose.model('users', userSchema);
