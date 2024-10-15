@@ -1,0 +1,22 @@
+{
+    "clientName": "Thunder Client",
+    "environmentName": "market-place",
+    "environmentId": "566e005f-8193-4976-8f29-28827d03ba17",
+    "dateExported": "2024-10-15T13:40:59.168Z",
+    "version": "1.2",
+    "variables": [
+        {
+            "name": "BaseUrl",
+            "value": "http://localhost:"
+        },
+        {
+            "name": "Port",
+            "value": "3000"
+        },
+        {
+            "name": "token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MGQ4MGZiZTg1ZWQxMjM1MmVkY2ZhMyIsImlhdCI6MTcyODkzODMyOSwiZXhwIjoxNzI5MDI0NzI5fQ.Ig81YlkbohomhJkAWbe-k5wb0lvoFjfcvd3kkS-hTto"
+        }
+    ],
+    "ref": "O0FkkTO9H6zeIF53r9AVcRcFhPjOC96a9lOJbRHht2-RQCLzMjGN2cudTguG4Rwo"
+}
