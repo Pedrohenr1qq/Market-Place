@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
   barCode: {type: Number, required: true, unique:true},
   categories: [
     {
-      _id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, ref: "categories"},
+      _id: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "categories"},
       createdAt: {type: Date, required: true, default: Date.now()}
     }
   ]
