@@ -4,9 +4,6 @@ const bcrypt = require('bcrypt');
 const userLogin = async (req, res) => {
   try {
     const {email, password} = req.body;
-
-    if(!email) return res.status(400).send({message: "email field is empty"});
-    if(!password) return res.status(400).send({message: "password field is empty"});
   
     const user = await authService.loginService(email);
 

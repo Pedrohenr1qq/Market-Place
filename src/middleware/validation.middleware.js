@@ -1,19 +1,29 @@
 // Dependencies
 const ObjectId = require('mongoose').Types.ObjectId;
 
+function showErrors(errors){
+  if(errors.length > 1) return `The fields '${errors}' are empties`;
+  else return `The field '${errors}' is empty`
+}
+
 const validateUser = (req, res, next) => {
+  let errors = []
   const user = req.body;
 
-  if(!user.name) return res.status(400).send({message: "The name field is empty"});
-  if(!user.email) return res.status(400).send({message: "The email field is empty"});
-  if(!user.password) return res.status(400).send({message: "The password field is empty"});
-  if(!user.image) return res.status(400).send({message: "The image field is empty"});
+  if(!user.name) errors.push('name');
+  if(!user.email) errors.push('email');
+  if(!user.password) errors.push('password');
+  if(!user.image) errors.push('image');
+
+  if(errors.length != 0){
+    return res.status(400).send({message: showErrors(errors)});
+  }
 
   return next();
 }
 
 const validateProduct = async (req, res, next) => {
-  const errors = [];
+  let errors = []
   const product = req.body;
 
   if(!product.name) errors.push("name");
@@ -24,8 +34,7 @@ const validateProduct = async (req, res, next) => {
   if(!product.categories) errors.push("categories");
 
   if(errors.length != 0){
-    if(errors.length > 1) return res.status(400).send({message: `The fields '${errors}' are empties`});
-    else return res.status(400).send({message: `The field '${errors}' is empty`});
+    return res.status(400).send({message: showErrors(errors)});
   }
 
   return next();
@@ -38,7 +47,7 @@ const validateCategory = async (req, res, next) => {
 }
 
 const validateOrder = async (req, res, next) => {
-  const errors = [];
+  let errors = []
   const order = req.body;
 
   if(!order.totalPrice) errors.push("totalPrice");
@@ -46,23 +55,21 @@ const validateOrder = async (req, res, next) => {
   if(order.completed == undefined) errors.push("completed");
 
   if(errors.length != 0){
-    if(errors.length > 1) return res.status(400).send({message: `The fields '${errors}' are empties`});
-    else return res.status(400).send({message: `The field '${errors}' is empty`});
+    return res.status(400).send({message: showErrors(errors)});
   }
 
   return next();
 }
 
 const validateShoppCart = async (req, res, next) => {
-  const errors = [];
+  let errors = []
   const shoppCart = req.body;
 
   if(!shoppCart.totalPrice) errors.push("totalPrice");
   if(!shoppCart.freight) errors.push("freight");
 
   if(errors.length != 0){
-    if(errors.length > 1) return res.status(400).send({message: `The fields '${errors}' are empties`});
-    else return res.status(400).send({message: `The field '${errors}' is empty`});
+    return res.status(400).send({message: showErrors(errors)});
   }
 
   return next();
@@ -73,11 +80,26 @@ const validateId = async (req, res, next) => {
   else return res.status(400).send({message: `Invalid ID`});
 }
 
+const validateLogin = async (req, res, next) => {
+  const login = req.body;
+  let errors = []
+
+  if(!login.email) errors.push("email");
+  if(!login.password) errors.push("passowrd");
+
+  if(errors.length != 0){
+    return res.status(400).send({message: showErrors(errors)});
+  }
+
+  return next();
+}
+
 module.exports = {
   validateUser,
   validateProduct,
   validateCategory,
   validateOrder,
   validateShoppCart,
-  validateId
+  validateId,
+  validateLogin
 }
