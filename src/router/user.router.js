@@ -4,25 +4,25 @@ const router = require('express').Router();
 // Internal Requires
 const userController = require('../controller/user.controller');
 const authMiddleware = require('../middleware/auth.middleware');
-const {validateUser} = require('../middleware/validation.middleware');
+const {validateUser, validateId} = require('../middleware/validation.middleware');
 
 // Create routes
 // GET
-router.get('/findById/:id', authMiddleware, userController.findUserById);
+router.get('/findById/:id', authMiddleware, validateId, userController.findUserById);
 router.get('/findAll', authMiddleware, userController.findAllUsers);
 
 // POST
 router.post('/create', validateUser, userController.createUser);
-router.post('/addAddress/:id', authMiddleware,  userController.addAddress);
-router.post('/addFavProduct/:id', authMiddleware, userController.addFavProduct);
+router.post('/addAddress/:id', authMiddleware, validateId,  userController.addAddress);
+router.post('/addFavProduct/:id', authMiddleware, validateId, userController.addFavProduct);
 
 // PUT
-router.put('/update/:id',authMiddleware, validateUser,userController.updateUser);
+router.put('/update/:id',authMiddleware, validateId, validateUser, userController.updateUser);
 
 // DELETE
-router.delete('/delete/:id', authMiddleware, userController.deleteUser);
-router.delete('/removeAddress/:id', authMiddleware, userController.removeAddress);
-router.delete('/removeFavProduct/:id', authMiddleware, userController.removeFavProduct);
+router.delete('/delete/:id', authMiddleware, validateId, userController.deleteUser);
+router.delete('/removeAddress/:id', authMiddleware, validateId, userController.removeAddress);
+router.delete('/removeFavProduct/:id', authMiddleware, validateId, userController.removeFavProduct);
 
 
 module.exports = router;

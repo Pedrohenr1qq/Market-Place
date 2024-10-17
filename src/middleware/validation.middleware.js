@@ -1,3 +1,6 @@
+// Dependencies
+const ObjectId = require('mongoose').Types.ObjectId;
+
 const validateUser = (req, res, next) => {
   const user = req.body;
 
@@ -65,10 +68,16 @@ const validateShoppCart = async (req, res, next) => {
   return next();
 }
 
+const validateId = async (req, res, next) => {
+  if(ObjectId.isValid(req.params.id)) return next();
+  else return res.status(400).send({message: `Invalid ID`});
+}
+
 module.exports = {
   validateUser,
   validateProduct,
   validateCategory,
   validateOrder,
-  validateShoppCart
+  validateShoppCart,
+  validateId
 }
