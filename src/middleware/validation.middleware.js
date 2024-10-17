@@ -40,7 +40,7 @@ const validateOrder = async (req, res, next) => {
 
   if(!order.totalPrice) errors.push("totalPrice");
   if(!order.freight) errors.push("freight");
-  if(!order.completed) errors.push("completed");
+  if(order.completed == undefined) errors.push("completed");
 
   if(errors.length != 0){
     if(errors.length > 1) return res.status(400).send({message: `The fields '${errors}' are empties`});
