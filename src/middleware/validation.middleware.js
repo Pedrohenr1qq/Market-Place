@@ -34,8 +34,41 @@ const validateCategory = async (req, res, next) => {
   return next();
 }
 
+const validateOrder = async (req, res, next) => {
+  const errors = [];
+  const order = req.body;
+
+  if(!order.totalPrice) errors.push("totalPrice");
+  if(!order.freight) errors.push("freight");
+  if(!order.completed) errors.push("completed");
+
+  if(errors.length != 0){
+    if(errors.length > 1) return res.status(400).send({message: `The fields '${errors}' are empties`});
+    else return res.status(400).send({message: `The field '${errors}' is empty`});
+  }
+
+  return next();
+}
+
+const validateShoppCart = async (req, res, next) => {
+  const errors = [];
+  const shoppCart = req.body;
+
+  if(!shoppCart.totalPrice) errors.push("totalPrice");
+  if(!shoppCart.freight) errors.push("freight");
+
+  if(errors.length != 0){
+    if(errors.length > 1) return res.status(400).send({message: `The fields '${errors}' are empties`});
+    else return res.status(400).send({message: `The field '${errors}' is empty`});
+  }
+
+  return next();
+}
+
 module.exports = {
   validateUser,
   validateProduct,
-  validateCategory
+  validateCategory,
+  validateOrder,
+  validateShoppCart
 }
