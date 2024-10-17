@@ -5,11 +5,12 @@ const router = require('express').Router();
 const orderController = require('../controller/order.controller');
 const authMiddleware = require('../middleware/auth.middleware');
 const {validateOrder, validateId} = require('../middleware/validation.middleware');
+const pagination = require('../middleware/pagination.middleware');
 
 // Create routes
 // GET
 router.get('/findById/:id', authMiddleware, validateId, orderController.findOrderById);
-router.get('/findAll', authMiddleware, orderController.findAllOrders);
+router.get('/findAll', authMiddleware, pagination, orderController.findAllOrders);
 
 // POST
 router.post('/create', authMiddleware, validateOrder, orderController.createOrder);

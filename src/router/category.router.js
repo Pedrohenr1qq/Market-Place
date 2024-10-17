@@ -5,11 +5,12 @@ const router = require('express').Router();
 const categoryController = require('../controller/category.controller');
 const authMiddleware = require('../middleware/auth.middleware');
 const {validateCategory, validateId} = require('../middleware/validation.middleware');
+const pagination = require('../middleware/pagination.middleware');
 
 // Create routes
 // GET
 router.get('/findById/:id', authMiddleware, validateId, categoryController.findCategoryById);
-router.get('/findAll', authMiddleware, categoryController.findAllCategories);
+router.get('/findAll', authMiddleware, pagination, categoryController.findAllCategories);
 
 // POST
 router.post('/create', authMiddleware, validateCategory, categoryController.createCategory);

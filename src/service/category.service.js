@@ -2,7 +2,7 @@ const Category = require('../model/category.model');
 
 const findCategoryById = (id) => Category.findById(id);
 
-const findAllCategories = () => Category.find();
+const findAllCategories = (limit, offset) => Category.find().limit(limit).skip(offset);
 
 const createCategory = (newCategory) => Category.create(newCategory);
 

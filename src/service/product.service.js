@@ -2,7 +2,7 @@ const Product = require('../model/product.model');
 
 const findProductById = (id) => Product.findById(id);
 
-const findAllProducts = () => Product.find();
+const findAllProducts = (limit, offset) => Product.find().limit(limit).skip(offset);
 
 const createProduct = (newProduct) => Product.create(newProduct);
 

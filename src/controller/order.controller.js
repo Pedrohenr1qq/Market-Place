@@ -12,7 +12,7 @@ const findOrderById = async (req, res) => {
 
 const findAllOrders = async (req, res) => {
   try {
-    res.send(await orderService.findAllOrders());
+    res.send(await orderService.findAllOrders(req.query.limit, req.query.offset));
 
   } catch (err) {
     console.log(`Error in find all ORDERS: ${err.message}`);

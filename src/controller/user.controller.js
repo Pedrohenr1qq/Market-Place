@@ -20,7 +20,7 @@ const findUserById = async (req,res) =>{
 
 const findAllUsers = async (req,res) =>{
   try {
-    return  res.send(await userService.findAllUsers());
+    return  res.send(await userService.findAllUsers(req.query.limit, req.query.offset));
   } catch (error) {
     console.log(`Error in find all users: ${error.message}`);
     return res.status(500).send({message: 'Internal error. Try again later.'});

@@ -13,7 +13,7 @@ const findProductById = async (req, res) => {
 
 const findAllProducts = async (req, res) => {
   try {
-    res.send(await productService.findAllProducts());
+    res.send(await productService.findAllProducts(req.query.limit, req.query.offset));
 
   } catch (err) {
     console.log(`Error in find all PRODUCTS: ${err.message}`);

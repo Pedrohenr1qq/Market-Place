@@ -2,7 +2,7 @@ const ShoppCart = require('../model/shoppCart.model');
 
 const findShoppCartById = (id) => ShoppCart.findById(id);
 
-const findAllShoppCarts = () => ShoppCart.find();
+const findAllShoppCarts = (limit, offset) => ShoppCart.find().limit(limit).skip(offset);
 
 const createShoppCart = (newShoppCart) => ShoppCart.create(newShoppCart);
 

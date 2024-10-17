@@ -12,7 +12,7 @@ const findCategoryById = async (req,res) => {
 
 const findAllCategories = async (req,res) => {
   try {
-    res.send(await categoryService.findAllCategories());
+    res.send(await categoryService.findAllCategories(req.query.limit, req.query.offset));
 
   } catch (err) {
     console.log(`Error in find all CATEGORIES: ${err.message}`);

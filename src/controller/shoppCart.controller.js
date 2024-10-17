@@ -13,7 +13,7 @@ const findShoppCartById = async (req, res) => {
 
 const findAllShoppCarts = async (req, res) => {
   try {
-    res.send(await shoppCartService.findAllShoppCarts());
+    res.send(await shoppCartService.findAllShoppCarts(req.query.limit, req.query.offset));
 
   } catch (err) {
     console.log(`Error in find all SHOPP_CARTS: ${err.message}`);

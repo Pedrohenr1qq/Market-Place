@@ -5,11 +5,12 @@ const router = require('express').Router();
 const userController = require('../controller/user.controller');
 const authMiddleware = require('../middleware/auth.middleware');
 const {validateUser, validateId} = require('../middleware/validation.middleware');
+const pagination = require('../middleware/pagination.middleware');
 
 // Create routes
 // GET
 router.get('/findById/:id', authMiddleware, validateId, userController.findUserById);
-router.get('/findAll', authMiddleware, userController.findAllUsers);
+router.get('/findAll', authMiddleware, pagination, userController.findAllUsers);
 
 // POST
 router.post('/create', validateUser, userController.createUser);
