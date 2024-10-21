@@ -79,10 +79,6 @@ const addAddress= async (req,res) =>{
     const newAddress = req.body;
     newAddress.createdAt = new Date();
 
-    if(!newAddress.street) return res.status(400).send({message: "street field is empty"});
-    if(!newAddress.number) return res.status(400).send({message: "number field is empty"});
-    if(!newAddress.CEP) return res.status(400).send({message: "CEP field is empty"});
-
     const addressAdded = await userService.addAddress(req.params.id, newAddress);
 
     if(addressAdded != null) return res.send({message: "User address added"});

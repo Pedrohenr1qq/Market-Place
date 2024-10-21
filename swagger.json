@@ -1,0 +1,48 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API market place",
+    "description": "Uma API completa para um market place",
+    "contact": {
+      "name": "Pedro",
+      "email": "pedrohenr1qq@gmail.com"
+      },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/3000/",
+      "description": "API de test LOCAL"
+    }
+  ],
+  "paths": {
+    "/user/FindAll":{
+      "get":{
+        "summary": "Mostra todos os usuários cadastrados",
+        "description": "Rota responsável por listar os usuários cadastrados desta API",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "OK. Tarefa concluida com sucesso"
+          },
+          "401": {
+            "description": "Erro de autenticação"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      }
+    },
+    "/user/FindById":{
+      "get":{
+        "summary": "Mostra o usuário escolhido pelo ID",
+        "description": "Rota responsável mostrar o usuário selecionado pelo ID",
+        "tags": ["User"]
+      }
+    }
+  }
+}
