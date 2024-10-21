@@ -20,7 +20,8 @@ const addAddress = (id, address) => {
   return User.findOneAndUpdate(
     {
       _id: id
-    }, {
+    }, 
+    {
       $push: {
         addresses: address
       }
@@ -56,9 +57,7 @@ const addFavProduct = (id, favProduct) =>{
     },
     {
       $push:{
-        favProducts: {
-          _id: favProduct._id
-        }
+        favProducts: favProduct
       }
     },
     {
