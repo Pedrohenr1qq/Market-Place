@@ -22,14 +22,12 @@ connectToDatabase();
 // Starting application
 const app = express();
 
-app.use(express.json(
-  {
-    origin: "https://localhost:3001",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
-  }
-));
+app.use(express.json());
 
-app.use(cors());
+app.use(cors(  {
+  origin: "https://localhost:3001",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+}));
 
 //Create Routes
 app.use('/auth', authRouter);
