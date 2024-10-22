@@ -11,37 +11,198 @@
   },
   "servers": [
     {
-      "url": "http://localhost/3000/",
+      "url": "http://localhost:3000/",
       "description": "API de test LOCAL"
     }
   ],
   "paths": {
     "/user/FindAll":{
       "get":{
+        "security":[{
+          "bearerAuth": []
+        }],  
         "summary": "Mostra todos os usuários cadastrados",
         "description": "Rota responsável por listar os usuários cadastrados desta API",
         "tags": ["User"],
+        "parameters": [
+          {
+            "in": "query",
+            "schema": {"type": "integer"},
+            "name": "limit"
+          },
+          {
+            "in": "query",
+            "schema": {"type": "integer"},
+            "name": "offset"
+          }
+        ],
+        
         "responses": {
           "200": {
-            "description": "OK. Tarefa concluida com sucesso"
+            "description": "OK. Tarefa concluida com sucesso",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Erro de autenticação"
+            "description": "Erro de autenticação",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties": {
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Usuário não encontrado"
+            "description": "Usuário não encontrado",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties": {
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Erro interno."
+            "description": "Erro interno.",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties": {
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/user/FindById":{
+    "/user/FindById/{id}":{
       "get":{
+        "security":[{
+          "bearerAuth": []
+        }],  
         "summary": "Mostra o usuário escolhido pelo ID",
         "description": "Rota responsável mostrar o usuário selecionado pelo ID",
-        "tags": ["User"]
+        "tags": ["User"],
+        "parameters":[{
+          "in": "path",
+          "schema": {"type": "string"},
+          "name": "id"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK. Tarefa concluida com sucesso",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "$ref":"#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro de autenticação",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties": {
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties": {
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno.",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties": {
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes":{
+      "bearerAuth":{
+        "type":  "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+
+    "schemas": {
+      "User":{
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "email": {"type": "string"},
+          "password": {"type": "string"},
+          "image": {"type": "string"},
+          "addresses": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "street": {"type": "string"},
+                "number": {"type": "number"},
+                "complement": {"type": "string"},
+                "CEP": {"type": "string"},
+                "createdAt": {"type": "string"}
+              }
+            }
+          },
+          "createdAt": {"type": "string"},
+          "favProducts": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "_id": {"type": "string"},
+                "createdAt": {"type": "string"}
+              }
+            }
+          },
+          "admin": {"type": "boolean"}
+        }
       }
     }
   }
