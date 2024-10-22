@@ -2,6 +2,7 @@
 const express = require('express');
 
 require('dotenv').config();
+const cors = require('cors');
 
 // Internal Requires
 const connectToDatabase = require('./src/database/database');
@@ -21,7 +22,14 @@ connectToDatabase();
 // Starting application
 const app = express();
 
-app.use(express.json());
+app.use(express.json(
+  {
+    origin: "https://localhost:3001",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+  }
+));
+
+app.use(cors());
 
 //Create Routes
 app.use('/auth', authRouter);
